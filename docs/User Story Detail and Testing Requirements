@@ -1,0 +1,40 @@
+USER STORY
+  RELATED TESTING
+  
+As a user of multiple secure website accounts I want a central secure store for my passwords
+
+As a user of multiple secure website accounts I want to log in to my central password store with a single user id and password
+  TEST LOG IN:  ID/PASSWORD RETRIEVAL - CORRECT ID/PASSWORD PAIRS RETRIEVED / CORRECT PASSWORD RETURNS TRUE
+  TEST LOG IN / LOG OUT STATUS CHANGED
+  TEST LOG IN ERROR MESSAGES:  MESSAGE APPEARS AFTER INCORRECT ATTEMPT / INCORRECT PASSWORD RETURNS FALSE
+    RETRY SCREEN APPEARS - CHECK THAT ATTEMPTS HAVE NOT EXCEEDED MAXIMUM IF RETRY SCREEN IS AVAILABLE
+    RESET PROMPT APPEARS - TEST THAT RESET APPEARS AFTER MAX ATTEMPTS ACHIEVED
+  TEST THAT FEATURES UNAVAILABLE TO USERS NOT LOGGED IN
+As a customer I want to easily create an account to my password store
+  TEST ACCOUNT CREATION:  ID/PASSWORD STORAGE - USER EXISTS?
+  TEST NEW USER LOG IN STATUS
+As a customer I want my accounts securely encrypted
+  TEST ENCRYPTION/DECRYPTION
+As a customer I want to reset forgotten or outdated passwords
+  TEST THAT OLD PASSWORD IS NO LONGER AVAILABLE AFTER RESET
+  TEST THAT RESET PASSWORD WORKS AT LOG IN
+  TEST THAT PASSWORD RESET AUTOMATICALLY LOGS IN - LOG IN/LOG OUT STATUS
+As a customer I want to customize my password store set-up
+
+As a customer I want an intuitive log-in
+
+As a customer I want easy navigation to features
+  TEST THAT NAVIGATION METHODS ARRIVE AT CORRECT PAGES
+As a customer I want to be forced to reset my password at designated intervals
+  TEST EXPIRATION DATE TRIGGERS PASSWORD RESET
+As a customer I want to easily maintain a list of all my passwords
+  TEST THAT LIST METHOD EXTRACTS CORRECT PASSWORD LIST
+  TEST THAT CHANGES TO THE LIST UPDATES RECORDS
+
+As a customer I want to review my account statistics such as old passwords and inactive accounts
+
+As a customer I want to easily access and change customized features
+
+As a customer I want to easily search my password and account data
+
+As a customer I want to easily edit my password information and personal data

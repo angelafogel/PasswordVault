@@ -1,0 +1,32 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PasswordVault2;
+
+
+namespace EncryptionTest
+{
+    [TestClass]
+    public class EncryptionTest
+    {
+        [TestMethod]
+        public void EncryptDecrypt()
+        {
+            // arrange
+            string plaintext = "testdata";
+            string password = "testpassword";
+            string encryptedText = " ";
+            string decryptedText = " "; 
+
+            // act
+            encryptedText = EncryptionDecryption.Encryption_ByteString_Conversion(plaintext, password);
+            decryptedText = EncryptionDecryption.DecryptFromString(decryptedText, password);
+            
+            // assert
+            Assert.AreNotEqual(encryptedText, plaintext, "Encryption is not functioning, encrypted == plaintext");
+            Assert.AreEqual(encryptedText, decryptedText, "Encrypted / Decrypted text does not match");
+
+           //text
+
+        }
+    }
+}

@@ -1,0 +1,132 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.IO;
+using System.Security.Cryptography;
+using System.Diagnostics;
+
+
+namespace PasswordVault2
+{
+    public static class EncryptionDecryption
+    {
+        
+        #region Encryptors and Decryptors
+
+        // Extracts user data from the form, sends data to bytes conversion,
+        // sends to encryption algorithm then converts back to string
+        public static string Encryption_ByteString_Conversion(string plain_text, string password)
+        {
+            return Encryption_ByteString_Conversion(PTtoBytes_CryptDecrypt(plain_text, password));
+        }
+
+        // Reverses Hex Byte string conversion then sends to decryption algorithm
+        public static string DecryptFromString(string encrypted_bytes_string, string password)
+        {
+            return Decryption(HexString_Bytes_Conversion(encrypted_bytes_string), password);
+        }
+
+        // Converts user data into an array of bytes then processes encryption alogrithm.
+        private static byte[] PTtoBytes_CryptDecrypt(string plain_text, string password)
+        {
+            ASCIIEncoding ascii_encoder = new ASCIIEncoding();
+            byte[] pt_bytes_array = ascii_encoder.GetBytes(plain_text);
+            return EncryptDecryptBytes(password, pt_bytes_array, true);
+        }
+
+        // Decrypt the string from an array of bytes.
+        private static string Decryption(byte[] encrypted_bytes, string password)
+        {
+            byte[] decrypted_bytes = EncryptDecryptBytes(password, encrypted_bytes, false);
+            ASCIIEncoding ascii_encoder = new ASCIIEncoding();
+            return new string(ascii_encoder.GetChars(decrypted_bytes));
+        }
+
+        // Convert bytes into a string.
+        private static string Encryption_ByteString_Conversion(byte[] bytes)
+        {
+            string result = "";
+            foreach (byte b in bytes)
+            {
+                result += " " + b.ToString("X2");
+            }
+            if (result.Length > 0) result = result.Substring(1);
+            return result;
+        }
+
+        // Convert a hex string into bytes.
+        private static byte[] HexString_Bytes_Conversion(string str)
+        {
+            str = str.Replace(" ", "");
+            int num_bytes = str.Length / 2;
+            byte[] bytes = new byte[num_bytes];
+            for (int i = 0; i < num_bytes; i++)
+            {
+                bytes[i] = Convert.ToByte(str.Substring(2 * i, 2), 16);
+            }
+            return bytes;
+        }
+
+        // Use the password to generate key bytes.
+        private static void Key_IV_Generator(string password, int key_size_bits, int block_size_bits, ref byte[] key, ref byte[] iv)
+        {
+            Rfc2898DeriveBytes derive_bytes = new Rfc2898DeriveBytes(password, 513);
+            key = derive_bytes.GetBytes(key_size_bits / 8);
+            iv = derive_bytes.GetBytes(block_size_bits / 8);
+        }
+
+        // PTtoBytes_CryptDecrypt or decryption of a byte array depending on encryptionTF bool variable.
+        private static byte[] EncryptDecryptBytes(string password, byte[] in_bytes, bool encryptionTF)
+        {
+            // Make an AES service provider.
+            AesCryptoServiceProvider AES = new AesCryptoServiceProvider();
+
+            // Find a valid key size for this provider.
+            int key_size_bits = 0;
+            for (int i = 1024; i >= 1; i--)
+            {
+                if (AES.ValidKeySize(i))
+                {
+                    key_size_bits = i;
+                    break;
+                }
+            }
+
+            // Get AES block size for Key and Initialization Vector generator.
+            int AES_BlockSize = AES.BlockSize;
+
+
+            // Key and Initialization Vector Generator.
+            byte[] key = null;
+            byte[] initVector = null;
+            Key_IV_Generator(password, key_size_bits, AES_BlockSize, ref key, ref initVector);
+
+            // Make the encryptor or decryptor depending on EncryptionTF bool variable.
+            ICryptoTransform cryptographicTransformation;
+            if (encryptionTF) cryptographicTransformation = AES.CreateEncryptor(key, initVector);
+            else cryptographicTransformation = AES.CreateDecryptor(key, initVector);
+
+            // Create streams and write the data.
+            MemoryStream MemoryOutputStream = new MemoryStream();
+            CryptoStream myCryptoStream = new CryptoStream(
+               MemoryOutputStream, cryptographicTransformation,
+               CryptoStreamMode.Write);
+            myCryptoStream.Write(in_bytes, 0, in_bytes.Length);
+
+            // Save the result.
+            byte[] result = MemoryOutputStream.ToArray();
+
+            // Stream close.
+
+            myCryptoStream.Close();
+            MemoryOutputStream.Close();
+
+            return result;
+        }
+
+        #endregion Encryptors and Decryptors
+    }
+}

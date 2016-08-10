@@ -1,0 +1,31 @@
+	
+IN SCOPE	
+	As a user of multiple secure website accounts I want a central secure store for my passwords
+	As a user of multiple secure website accounts I want to login to my central password store with a single user id and password
+	As a customer I want to easily create an account to my password store
+	As a customer I want my accounts securly encrypted
+	As a customer I want to reset forgotten or outdated passwords
+	As a customer I want to customize my password store set-up
+	As a customer I want an intuitive log-in 
+	As a customer I want easy navigation to features
+	As a customer I want to be forced to reset my password at designated intervals
+	As a customer I want to easily maintain a list of all of my passwords
+	As a customer I want to review my account statistics such as old passwords and inactive accounts
+	As a customer I want to easily access and change customized features
+	As a customer I want to easily search my password and account data
+	As a customer I want to easily edit my password information and personal data
+	
+	
+OUT OF SCOPE	
+	As a customer I want my passwords stored in the cloud
+	As a customer I want email or text notification when passwords locked out or out of date
+	As a customer I want advanced authentication services when locked out
+	As a customer I want to merge and transfer data to other vault services
+	As a customer I want to delete/rename/copy my vault
+	As a customer I want to back-up my vault
+	
+UNRESOLVED	
+	As a customer I want my passwords automatically populated for the corresponding secure sites
+	As a customer I want a central store of my personal data
+	As a customer I want to auto generate passwords
+	As a customer I want a historical record of my personal data such as cancelled account numbers

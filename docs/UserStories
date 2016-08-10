@@ -1,0 +1,52 @@
+PASSWORD VAULT USER STORIES			
+			
+NEW ACCOUNTS			
+	Central secure password store for multiple online accounts		
+	Create new account with master password		
+		user name/master password	
+		notification email address	
+	Option for default or custom setup		
+		List default options vs. all options	
+	Customize new account:		
+		option to store personal data - credit card info etc.	
+			Give the option to set-up personal data later
+		option to turn on form filling	
+		local or cloud storage options	
+		Auto generate passwords option	
+	Customize security:		
+		Single or multi-factor encryption - select encryption algorithm	
+		Set incorrect password attempt threshold and options	
+			Allow live authentication (secret question)
+			Password hint
+			Milti-level authentication (text/email) - force reset
+		Option to require user authentication after set period of non use (expired accounts)	
+		Set password aging period for reset notification	
+			Set authentication criteria if turned on
+			Send email that non use period approaching authentication level
+	Redirect used id/passwords		
+		Suggest variations on id/password attempted	
+			
+EXISTING ACCOUNTS			
+	Intuitive log-in for existing accounts		
+		Easy navigation to desired features	
+	Redirect expired accounts		
+		Authentication and reset	
+		Option to auto generate	
+	Lockout multiple incorrect attempts		
+		Send email after multiple incorrect attempts	
+	Reset forgotten id/passwords		
+	Intuitive method to update and read account maintenance list		
+		Insert	
+		Delete	
+	Intuitive method to sort lists of passwords, history, canceled accounts etc.		
+	Intuitive method to search id/passwords/personal data		
+		Include option to create if not found	
+	Notification to reset password after expired maximum use period		
+	Intuitive path to change customizations		
+		Easy list of current customizations and all possible customizations	
+	Simple notifications list to turn on/off		
+	Option to delete /copy/rename vault		
+	Back-up vault		
+		local?	
+		Cloud?	
+	Merge/transfer data from other vault services		
